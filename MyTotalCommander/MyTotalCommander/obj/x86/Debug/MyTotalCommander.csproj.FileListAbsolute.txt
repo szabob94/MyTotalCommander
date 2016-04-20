@@ -10,3 +10,15 @@ C:\Users\szabo\Downloads\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotal
 C:\Users\szabo\Downloads\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander.Properties.Resources.resources
 C:\Users\szabo\Downloads\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander.exe
 C:\Users\szabo\Downloads\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander.pdb
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander.exe
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander.pdb
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\bin\Debug\MyTotalCommander.exe
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\bin\Debug\MyTotalCommander.pdb
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander.csprojResolveAssemblyReference.cache
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MainWindow.baml
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MainWindow.g.cs
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\App.g.cs
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander_MarkupCompile.cache
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander.g.resources
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander.Properties.Resources.resources
+C:\Users\szabo\Desktop\GitHub\MyTotalCommander\MyTotalCommander\MyTotalCommander\obj\x86\Debug\MyTotalCommander.csproj.GenerateResource.Cache

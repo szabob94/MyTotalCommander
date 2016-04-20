@@ -251,6 +251,10 @@ namespace WpfApplication37
             {
                 MessageBox.Show("Meghajtót nem törölhetsz!", "Hiba", MessageBoxButton.OK);
             }
+            else if (selected_item != null && selected_item.Name.Equals("...."))
+            {
+                MessageBox.Show("Nincs létező mappa kijelölve!", "Hiba", MessageBoxButton.OK);
+            }
             else if (selected_item != null && selected_item.Type == EntryType.Dir)
             {
                 var result = MessageBox.Show("Biztosan törölni szeretné a mappát?", "Mappa törlése", MessageBoxButton.YesNo);
