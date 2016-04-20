@@ -1,0 +1,35 @@
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\obj\x86\Debug\MainWindow.baml
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\obj\x86\Debug\MainWindow.g.cs
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\obj\x86\Debug\App.g.cs
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37_MarkupCompile.cache
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.g.resources
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.Properties.Resources.resources
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.csproj.GenerateResource.Cache
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\bin\Debug\WpfApplication37.exe
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\bin\Debug\WpfApplication37.pdb
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.exe
+c:\users\kacsa\documents\visual studio 2010\Projects\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.pdb
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.exe
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.pdb
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\bin\Debug\WpfApplication37.exe
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\bin\Debug\WpfApplication37.pdb
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.csprojResolveAssemblyReference.cache
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\MainWindow.baml
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\MainWindow.g.cs
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\App.g.cs
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37_MarkupCompile.cache
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.g.resources
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.Properties.Resources.resources
+C:\Users\hallgato\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.csproj.GenerateResource.Cache
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.exe
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.pdb
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\bin\Debug\WpfApplication37.exe
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\bin\Debug\WpfApplication37.pdb
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.csprojResolveAssemblyReference.cache
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\MainWindow.baml
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\MainWindow.g.cs
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\App.g.cs
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37_MarkupCompile.cache
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.g.resources
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.Properties.Resources.resources
+C:\Users\szabo\Downloads\WpfApplication37\WpfApplication37\obj\x86\Debug\WpfApplication37.csproj.GenerateResource.Cache
