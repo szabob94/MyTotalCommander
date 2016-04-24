@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.IO;
+using Microsoft.VisualBasic.FileIO;
 
 namespace WpfApplication37
 {
@@ -292,6 +293,43 @@ namespace WpfApplication37
                 showFilesAndDirectories(d, jobb_listview_path, subEntries2);
         }
 
+        private void CopyOnClick(object sender, RoutedEventArgs e)
+        {
+            string hova;
+            if (selected_listview == 1)
+                hova = jobb_listview_path;
+            else
+                hova = bal_listview_path;
+            
+            if (selected_item.Type == EntryType.Dir)
+            {
+                FileSystem.CopyDirectory(selected_item.Fullpath, hova + @"\" + selected_item.Name,
+                UIOption.AllDialogs);
+            } else if(selected_item.Type == EntryType.File)
+            {
+                FileSystem.CopyFile(selected_item.Fullpath, hova + @"\" + selected_item.Name,
+                UIOption.AllDialogs);
+            } else
+            {
+                MessageBox.Show("A kijelölt elem nem másolható!", "Hiba", MessageBoxButton.OK);
+            }
+
+            DirectoryInfo dir = new DirectoryInfo(bal_listview_path);
+            DirectoryEntry d = new DirectoryEntry(
+                        dir.Name, dir.FullName, "<Folder>", "<DIR>",
+                        Directory.GetLastWriteTime(bal_listview_path),
+                        "", EntryType.Dir);
+            if (bal_listview_path.Equals(jobb_listview_path))
+            {
+                showFilesAndDirectories(d, jobb_listview_path, subEntries);
+                showFilesAndDirectories(d, jobb_listview_path, subEntries2);
+            }
+            else if (selected_listview == 1)
+                showFilesAndDirectories(d, bal_listview_path, subEntries);
+            else
+                showFilesAndDirectories(d, jobb_listview_path, subEntries2);
+
+        }
     }
 
     public enum EntryType

@@ -57,6 +57,6 @@
         <Button Content="Új mappa" HorizontalAlignment="Left" Height="21" Margin="10,285,0,0" VerticalAlignment="Top" Width="79" Click="ujmappa_click"/>
         <Button Content="Törlés" HorizontalAlignment="Left" Margin="89,285,0,0" VerticalAlignment="Top" Width="75" Click="DeleteDirectory"/>
         <Button Content="Áthelyezés" HorizontalAlignment="Left" Margin="164,285,0,0" VerticalAlignment="Top" Width="75" />
-        <Button Content="Másolás" HorizontalAlignment="Left" Margin="239,285,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Másolás" HorizontalAlignment="Left" Margin="239,285,0,0" VerticalAlignment="Top" Width="75" Click="CopyOnClick"/>
     </Grid>
 </Window>
