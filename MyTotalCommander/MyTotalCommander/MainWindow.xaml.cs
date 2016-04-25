@@ -42,7 +42,9 @@ namespace WpfApplication37
         {
             foreach (string s in Directory.GetLogicalDrives())
             {
-                DirectoryEntry d = new DirectoryEntry(s, s, "<Driver>", "<DIR>", Directory.GetLastWriteTime(s), "Images/dir.gif", EntryType.Dir);
+                DirectoryEntry d = new DirectoryEntry(s, s, "<Driver>", "<DIR>", Directory.GetLastWriteTime(s), null, EntryType.Dir);
+                d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
+                //d.Imagepath.Source = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
                 entries.Add(d);
             }
             this.listView1.DataContext = entries;
@@ -58,7 +60,8 @@ namespace WpfApplication37
                 DirectoryEntry bal_d = new DirectoryEntry(
                         bal_dir.Name, bal_dir.FullName, "<Folder>", "<DIR>",
                         Directory.GetLastWriteTime(bal_listview_path),
-                        "", EntryType.Dir);
+                        null, EntryType.Dir);
+                bal_d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
                 showFilesAndDirectories(bal_d, bal_listview_path, subEntries);
             }
             if (jobb_listview_path != null && !jobb_listview_path.Equals(""))
@@ -67,7 +70,8 @@ namespace WpfApplication37
                 DirectoryEntry jobb_d = new DirectoryEntry(
                             jobb_dir.Name, jobb_dir.FullName, "<Folder>", "<DIR>",
                             Directory.GetLastWriteTime(jobb_listview_path),
-                            "", EntryType.Dir);
+                            null, EntryType.Dir);
+                jobb_d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
                 showFilesAndDirectories(jobb_d, jobb_listview_path, subEntries2);
             }
 
@@ -96,7 +100,7 @@ namespace WpfApplication37
                     {
                         path = entry.Fullpath.Substring(0, entry.Fullpath.LastIndexOf(@"\"));
                     }
-
+                    entry.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
                     selected_item = null;
                     showFilesAndDirectories(entry, path, subEntries);
                 }
@@ -107,7 +111,8 @@ namespace WpfApplication37
                     subEntries.Clear();
                     foreach (string s in Directory.GetLogicalDrives())
                     {
-                        DirectoryEntry d = new DirectoryEntry(s, s, "<Driver>", "<DIR>", Directory.GetLastWriteTime(s), "Images/dir.gif", EntryType.Dir);
+                        DirectoryEntry d = new DirectoryEntry(s, s, "<Driver>", "<DIR>", Directory.GetLastWriteTime(s), null, EntryType.Dir);
+                        d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
                         subEntries.Add(d);
                     }
                 }
@@ -145,6 +150,7 @@ namespace WpfApplication37
                     }
 
                     selected_item = null;
+                    entry.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
                     showFilesAndDirectories(entry, path, subEntries2);
                 }
                 else
@@ -154,7 +160,8 @@ namespace WpfApplication37
                     subEntries2.Clear();
                     foreach (string s in Directory.GetLogicalDrives())
                     {
-                        DirectoryEntry d = new DirectoryEntry(s, s, "<Driver>", "<DIR>", Directory.GetLastWriteTime(s), "Images/dir.gif", EntryType.Dir);
+                        DirectoryEntry d = new DirectoryEntry(s, s, "<Driver>", "<DIR>", Directory.GetLastWriteTime(s), null, EntryType.Dir);
+                        d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
                         subEntries2.Add(d);
                     }
                 }
@@ -172,8 +179,9 @@ namespace WpfApplication37
             DirectoryEntry dd = new DirectoryEntry(
                             "....", path, "<Folder>", "<DIR>",
                             entry.Date,
-                            "Images/folder.gif", EntryType.Dir);
+                            null, EntryType.Dir);
             dd.Lastpath = path;
+            dd.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
             subEntries.Add(dd);
             try
             {
@@ -183,8 +191,9 @@ namespace WpfApplication37
                     DirectoryEntry d = new DirectoryEntry(
                         dir.Name, dir.FullName, "<Folder>", "<DIR>",
                         Directory.GetLastWriteTime(s),
-                        "Images/folder.gif", EntryType.Dir);
+                        null, EntryType.Dir);
                     d.Lastpath = entry.Fullpath;
+                    d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
                     subEntries.Add(d);
                 }
                 foreach (string f in Directory.GetFiles(entry.Fullpath))
@@ -193,7 +202,7 @@ namespace WpfApplication37
                     DirectoryEntry d = new DirectoryEntry(
                         file.Name, file.FullName, file.Extension, file.Length.ToString(),
                         file.LastWriteTime,
-                        "Images/file.gif", EntryType.File);
+                        null, EntryType.File);
                     subEntries.Add(d);
                 }
             }
@@ -419,10 +428,10 @@ namespace WpfApplication37
         private string _ext;
         private string _size;
         private DateTime _date;
-        private string _imagepath;
+        private ImageSource _imagepath;
         private EntryType _type;
 
-        public DirectoryEntry(string name,string fullname, string ext, string size, DateTime date, string imagepath, EntryType type)
+        public DirectoryEntry(string name,string fullname, string ext, string size, DateTime date, ImageSource imagepath, EntryType type)
         {
             _name = name;
             _fullpath = fullname;
@@ -457,7 +466,7 @@ namespace WpfApplication37
             set { _date = value; }
         }
         
-        public string Imagepath
+        public ImageSource Imagepath
         {
             get { return _imagepath; }
             set { _imagepath = value; }
