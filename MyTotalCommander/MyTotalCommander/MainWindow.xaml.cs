@@ -17,6 +17,7 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace WpfApplication37
 {
+    public delegate void CopyFileOrDirectory(string honnan, string hova, UIOption option);
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -35,6 +36,7 @@ namespace WpfApplication37
         String jobb_listview_path = "";
         int selected_listview = -1;
         DirectoryEntry selected_item = null;
+
 
         void Window1_Loaded(object sender, RoutedEventArgs e)
         {
@@ -293,9 +295,28 @@ namespace WpfApplication37
                 showFilesAndDirectories(d, jobb_listview_path, subEntries2);
         }
 
+        public void TaskCompleted(IAsyncResult R)
+        {
+            AsyncTransfer transfer = (AsyncTransfer)R.AsyncState;
+            try {
+                transfer.Delegatee.EndInvoke(R);
+                if(transfer.Mode == 0)
+                    MessageBox.Show(transfer.Allomany + " másolása megtörtént.", "Kész", MessageBoxButton.OK);
+                else
+                    MessageBox.Show(transfer.Allomany + " áthelyezése megtörtént.", "Kész", MessageBoxButton.OK);
+            } catch (OperationCanceledException e)
+            {
+                if(transfer.Mode == 0)
+                    MessageBox.Show(transfer.Allomany + " másolása megszakítva.", "Hiba", MessageBoxButton.OK);
+                else
+                    MessageBox.Show(transfer.Allomany + " áthelyezése megszakítva.", "Hiba", MessageBoxButton.OK);
+            }
+        }
+
         private void CopyOnClick(object sender, RoutedEventArgs e)
         {
             string hova;
+            CopyFileOrDirectory delegatee=null;
             if (selected_listview == 1)
                 hova = jobb_listview_path;
             else
@@ -303,12 +324,14 @@ namespace WpfApplication37
             
             if (selected_item.Type == EntryType.Dir)
             {
-                FileSystem.CopyDirectory(selected_item.Fullpath, hova + @"\" + selected_item.Name,
-                UIOption.AllDialogs);
+                delegatee = new CopyFileOrDirectory(FileSystem.CopyDirectory);
+                delegatee.BeginInvoke(selected_item.Fullpath, hova + @"\" + selected_item.Name,
+                UIOption.AllDialogs, new AsyncCallback(TaskCompleted), new AsyncTransfer(delegatee,selected_item.Name,0));
             } else if(selected_item.Type == EntryType.File)
             {
-                FileSystem.CopyFile(selected_item.Fullpath, hova + @"\" + selected_item.Name,
-                UIOption.AllDialogs);
+                delegatee = new CopyFileOrDirectory(FileSystem.CopyDirectory);
+                delegatee.BeginInvoke(selected_item.Fullpath, hova + @"\" + selected_item.Name,
+                UIOption.AllDialogs, new AsyncCallback(TaskCompleted), new AsyncTransfer(delegatee, selected_item.Name,0));
             } else
             {
                 MessageBox.Show("A kijelölt elem nem másolható!", "Hiba", MessageBoxButton.OK);
@@ -334,6 +357,7 @@ namespace WpfApplication37
         private void MoveOnClick(object sender, RoutedEventArgs e)
         {
             string hova;
+            CopyFileOrDirectory delegatee = null;
             if (selected_listview == 1)
                 hova = jobb_listview_path;
             else
@@ -341,13 +365,19 @@ namespace WpfApplication37
 
             if (selected_item.Type == EntryType.Dir)
             {
-                FileSystem.MoveDirectory(selected_item.Fullpath, hova + @"\" + selected_item.Name,
-                UIOption.AllDialogs);
+                delegatee = new CopyFileOrDirectory(FileSystem.MoveDirectory);
+                delegatee.BeginInvoke(selected_item.Fullpath, hova + @"\" + selected_item.Name,
+                UIOption.AllDialogs, new AsyncCallback(TaskCompleted), new AsyncTransfer(delegatee, selected_item.Name, 1));
+                /*FileSystem.MoveDirectory(selected_item.Fullpath, hova + @"\" + selected_item.Name,
+                UIOption.AllDialogs);*/
             }
             else if (selected_item.Type == EntryType.File)
             {
-                FileSystem.MoveFile(selected_item.Fullpath, hova + @"\" + selected_item.Name,
-                UIOption.AllDialogs);
+                delegatee = new CopyFileOrDirectory(FileSystem.MoveFile);
+                delegatee.BeginInvoke(selected_item.Fullpath, hova + @"\" + selected_item.Name,
+                UIOption.AllDialogs, new AsyncCallback(TaskCompleted), new AsyncTransfer(delegatee, selected_item.Name, 1));
+                /*FileSystem.MoveFile(selected_item.Fullpath, hova + @"\" + selected_item.Name,
+                UIOption.AllDialogs);*/
             }
             else
             {
@@ -376,6 +406,38 @@ namespace WpfApplication37
     {
         Dir,
         File
+    }
+
+    public class AsyncTransfer
+    {
+        public CopyFileOrDirectory _delegatee;
+        public string _allomany;
+        public int _mode;
+
+        public AsyncTransfer(CopyFileOrDirectory delegatee, string allomany, int mode)
+        {
+            _delegatee = delegatee;
+            _allomany = allomany;
+            _mode = mode;
+        }
+
+        public CopyFileOrDirectory Delegatee
+        {
+            get { return _delegatee; }
+            set { _delegatee = value; }
+        }
+
+        public string Allomany
+        {
+            get { return _allomany; }
+            set { _allomany = value; }
+        }
+
+        public int Mode
+        {
+            get { return _mode; }
+            set { _mode = value; }
+        }
     }
 
     public class DirectoryEntry
