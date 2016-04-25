@@ -18,6 +18,7 @@ using Microsoft.VisualBasic.FileIO;
 namespace WpfApplication37
 {
     public delegate void CopyFileOrDirectory(string honnan, string hova, UIOption option);
+    public delegate void RefreshUI();
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -327,6 +328,8 @@ namespace WpfApplication37
             AsyncTransfer transfer = (AsyncTransfer)R.AsyncState;
             try {
                 transfer.Delegatee.EndInvoke(R);
+                RefreshUI refreshUI = new RefreshUI(populateStayedListViews);
+                Dispatcher.BeginInvoke(refreshUI);
                 if(transfer.Mode == 0)
                     MessageBox.Show(transfer.Allomany + " másolása megtörtént.", "Kész", MessageBoxButton.OK);
                 else
