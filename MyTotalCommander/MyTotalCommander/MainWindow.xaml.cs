@@ -50,6 +50,29 @@ namespace WpfApplication37
             
         }
 
+        void populateListViews()
+        {
+            if (bal_listview_path != null && !bal_listview_path.Equals(""))
+            {
+                DirectoryInfo bal_dir = new DirectoryInfo(bal_listview_path);
+                DirectoryEntry bal_d = new DirectoryEntry(
+                        bal_dir.Name, bal_dir.FullName, "<Folder>", "<DIR>",
+                        Directory.GetLastWriteTime(bal_listview_path),
+                        "", EntryType.Dir);
+                showFilesAndDirectories(bal_d, bal_listview_path, subEntries);
+            }
+            if (jobb_listview_path != null && !jobb_listview_path.Equals(""))
+            {
+                DirectoryInfo jobb_dir = new DirectoryInfo(jobb_listview_path);
+                DirectoryEntry jobb_d = new DirectoryEntry(
+                            jobb_dir.Name, jobb_dir.FullName, "<Folder>", "<DIR>",
+                            Directory.GetLastWriteTime(jobb_listview_path),
+                            "", EntryType.Dir);
+                showFilesAndDirectories(jobb_d, jobb_listview_path, subEntries2);
+            }
+
+        }
+
         void listViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListViewItem item = e.Source as ListViewItem;
@@ -174,9 +197,9 @@ namespace WpfApplication37
                     subEntries.Add(d);
                 }
             }
-            catch (IOException exception)
+            catch (Exception e)
             {
-
+                MessageBox.Show("Nincs jogosultsága!", "Hiba", MessageBoxButton.OK);
             }
         }
 
@@ -209,19 +232,7 @@ namespace WpfApplication37
             if (!alreadyExists)
             {
                 Directory.CreateDirectory(listview_path + "\\" + ujmappa_nev);
-                DirectoryInfo dir = new DirectoryInfo(listview_path);
-                DirectoryEntry d = new DirectoryEntry(
-                            dir.Name, dir.FullName, "<Folder>", "<DIR>",
-                            Directory.GetLastWriteTime(listview_path),
-                            "", EntryType.Dir);
-                if (bal_listview_path.Equals(jobb_listview_path))
-                {
-                    showFilesAndDirectories(d, jobb_listview_path, subEntries);
-                    showFilesAndDirectories(d, jobb_listview_path, subEntries2);
-                } else if (selected_listview == 1)
-                    showFilesAndDirectories(d, listview_path, subEntries);
-                else
-                    showFilesAndDirectories(d, listview_path, subEntries2);
+                populateListViews();
             }
             else
             {
@@ -279,20 +290,7 @@ namespace WpfApplication37
             {
                 MessageBox.Show("Nincs kijelölve elem", "Hiba", MessageBoxButton.OK);
             }
-            DirectoryInfo dir = new DirectoryInfo(bal_listview_path);
-            DirectoryEntry d = new DirectoryEntry(
-                        dir.Name, dir.FullName, "<Folder>", "<DIR>",
-                        Directory.GetLastWriteTime(bal_listview_path),
-                        "", EntryType.Dir);
-            if (bal_listview_path.Equals(jobb_listview_path))
-            {
-                showFilesAndDirectories(d, jobb_listview_path, subEntries);
-                showFilesAndDirectories(d, jobb_listview_path, subEntries2);
-            }
-            else if (selected_listview == 1)
-                showFilesAndDirectories(d, bal_listview_path, subEntries);
-            else
-                showFilesAndDirectories(d, jobb_listview_path, subEntries2);
+            populateListViews();
         }
 
         public void TaskCompleted(IAsyncResult R)
@@ -336,22 +334,7 @@ namespace WpfApplication37
             {
                 MessageBox.Show("A kijelölt elem nem másolható!", "Hiba", MessageBoxButton.OK);
             }
-
-            DirectoryInfo dir = new DirectoryInfo(bal_listview_path);
-            DirectoryEntry d = new DirectoryEntry(
-                        dir.Name, dir.FullName, "<Folder>", "<DIR>",
-                        Directory.GetLastWriteTime(bal_listview_path),
-                        "", EntryType.Dir);
-            if (bal_listview_path.Equals(jobb_listview_path))
-            {
-                showFilesAndDirectories(d, jobb_listview_path, subEntries);
-                showFilesAndDirectories(d, jobb_listview_path, subEntries2);
-            }
-            else if (selected_listview == 1)
-                showFilesAndDirectories(d, bal_listview_path, subEntries);
-            else
-                showFilesAndDirectories(d, jobb_listview_path, subEntries2);
-
+            populateListViews();
         }
 
         private void MoveOnClick(object sender, RoutedEventArgs e)
@@ -368,36 +351,18 @@ namespace WpfApplication37
                 delegatee = new CopyFileOrDirectory(FileSystem.MoveDirectory);
                 delegatee.BeginInvoke(selected_item.Fullpath, hova + @"\" + selected_item.Name,
                 UIOption.AllDialogs, new AsyncCallback(TaskCompleted), new AsyncTransfer(delegatee, selected_item.Name, 1));
-                /*FileSystem.MoveDirectory(selected_item.Fullpath, hova + @"\" + selected_item.Name,
-                UIOption.AllDialogs);*/
             }
             else if (selected_item.Type == EntryType.File)
             {
                 delegatee = new CopyFileOrDirectory(FileSystem.MoveFile);
                 delegatee.BeginInvoke(selected_item.Fullpath, hova + @"\" + selected_item.Name,
                 UIOption.AllDialogs, new AsyncCallback(TaskCompleted), new AsyncTransfer(delegatee, selected_item.Name, 1));
-                /*FileSystem.MoveFile(selected_item.Fullpath, hova + @"\" + selected_item.Name,
-                UIOption.AllDialogs);*/
             }
             else
             {
                 MessageBox.Show("A kijelölt elem nem másolható!", "Hiba", MessageBoxButton.OK);
             }
-
-            DirectoryInfo dir = new DirectoryInfo(bal_listview_path);
-            DirectoryEntry d = new DirectoryEntry(
-                        dir.Name, dir.FullName, "<Folder>", "<DIR>",
-                        Directory.GetLastWriteTime(bal_listview_path),
-                        "", EntryType.Dir);
-            if (bal_listview_path.Equals(jobb_listview_path))
-            {
-                showFilesAndDirectories(d, jobb_listview_path, subEntries);
-                showFilesAndDirectories(d, jobb_listview_path, subEntries2);
-            }
-            else if (selected_listview == 1)
-                showFilesAndDirectories(d, bal_listview_path, subEntries);
-            else
-                showFilesAndDirectories(d, jobb_listview_path, subEntries2);
+            populateListViews();
         }
     }
    
