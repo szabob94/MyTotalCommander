@@ -230,23 +230,28 @@ namespace WpfApplication37
         private void CreateDirectory(string ujmappa_nev, string listview_path)
         {
             bool alreadyExists = false;
-            foreach (string s in Directory.GetDirectories(listview_path))
-            {
-                DirectoryInfo directoryInfo = new DirectoryInfo(s);
-                if (directoryInfo.Name.Equals(ujmappa_nev))
+            try {
+                foreach (string s in Directory.GetDirectories(listview_path))
                 {
-                    alreadyExists = true;
+                    DirectoryInfo directoryInfo = new DirectoryInfo(s);
+                    if (directoryInfo.Name.Equals(ujmappa_nev))
+                    {
+                        alreadyExists = true;
+                    }
                 }
-            }
-            if (!alreadyExists)
+                if (!alreadyExists)
+                {
+                    Directory.CreateDirectory(listview_path + "\\" + ujmappa_nev);
+                    populateListViews();
+                }
+                else
+                {
+                    MessageBox.Show("Ilyen nevű mappa már létezik", "Hiba", MessageBoxButton.OK);
+                }
+            } catch(ArgumentException e)
             {
-                Directory.CreateDirectory(listview_path + "\\" + ujmappa_nev);
-                populateListViews();
-            }
-            else
-            {
-                MessageBox.Show("Ilyen nevű mappa már létezik", "Hiba", MessageBoxButton.OK);
-            }
+                MessageBox.Show("Itt nem hozhatsz létre mappát!", "Hiba", MessageBoxButton.OK);
+            }           
         }
 
         private void ujmappa_click(object sender, RoutedEventArgs e)
@@ -254,17 +259,22 @@ namespace WpfApplication37
             string ujmappa_nev = Microsoft.VisualBasic.Interaction.InputBox("Adja meg az új mappa nevét", "Új mappa létrehozása", "Új mappa", -1, -1);
             
             
-            if (selected_listview == 1 && bal_listview_path != null)
+            if (selected_listview == 1 && bal_listview_path != null && !ujmappa_nev.Equals("") && !bal_listview_path.Equals("") && !ContainsAny(ujmappa_nev,"/",@"\","*",":","?","\"","<",">","|"))
             {
                 CreateDirectory(ujmappa_nev, bal_listview_path);
             }
-            else if (selected_listview == 2 && jobb_listview_path != null)
+            else if (selected_listview == 2 && jobb_listview_path != null && !ujmappa_nev.Equals("") && !jobb_listview_path.Equals("") && !ContainsAny(ujmappa_nev, "/", @"\", "*", ":", "?", "\"", "<", ">", "|"))
             {
                 CreateDirectory(ujmappa_nev, jobb_listview_path);
             }
             else
             {
-                MessageBox.Show("Itt nem hozhatsz létre mappát!", "Hiba", MessageBoxButton.OK);
+                if (ujmappa_nev.Equals(""))
+                    MessageBox.Show("Megszakítva!", "Hiba", MessageBoxButton.OK);
+                else if(ContainsAny(ujmappa_nev, "/", @"\", "*", ":", "?", "\"", "<", ">", "|"))
+                    MessageBox.Show("A mappa neve nem megengedett karaktert tartalmaz!", "Hiba", MessageBoxButton.OK);
+                else
+                    MessageBox.Show("Itt nem hozhatsz létre mappát!", "Hiba", MessageBoxButton.OK);
             }
         }
 
@@ -378,6 +388,17 @@ namespace WpfApplication37
                 MessageBox.Show("A kijelölt elem nem másolható!", "Hiba", MessageBoxButton.OK);
             }
             populateListViews();
+        }
+
+        public bool ContainsAny(string haystack, params string[] needles)
+        {
+            foreach (string needle in needles)
+            {
+                if (haystack.Contains(needle))
+                    return true;
+            }
+
+            return false;
         }
     }
    
