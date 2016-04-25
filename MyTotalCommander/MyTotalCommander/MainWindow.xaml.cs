@@ -302,12 +302,18 @@ namespace WpfApplication37
                     MessageBox.Show(transfer.Allomany + " másolása megtörtént.", "Kész", MessageBoxButton.OK);
                 else
                     MessageBox.Show(transfer.Allomany + " áthelyezése megtörtént.", "Kész", MessageBoxButton.OK);
-            } catch (OperationCanceledException e)
+            } catch (Exception e)
             {
-                if(transfer.Mode == 0)
-                    MessageBox.Show(transfer.Allomany + " másolása megszakítva.", "Hiba", MessageBoxButton.OK);
-                else
-                    MessageBox.Show(transfer.Allomany + " áthelyezése megszakítva.", "Hiba", MessageBoxButton.OK);
+                if (e is OperationCanceledException)
+                {
+                    if (transfer.Mode == 0)
+                        MessageBox.Show(transfer.Allomany + " másolása megszakítva.", "Hiba", MessageBoxButton.OK);
+                    else
+                        MessageBox.Show(transfer.Allomany + " áthelyezése megszakítva.", "Hiba", MessageBoxButton.OK);
+                } else if (e is IOException)
+                {
+                    MessageBox.Show(transfer.Allomany + " másolása nem hajtható végre!", "Hiba", MessageBoxButton.OK);
+                }
             }
         }
 

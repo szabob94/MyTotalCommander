@@ -10,7 +10,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding ImagePath}"/>
+                                    <Image Source="{Binding Imagepath}"/>
                                     <TextBlock Text="{Binding Name}"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -36,7 +36,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding ImagePath}"/>
+                                    <Image Source="{Binding Imagepath}"/>
                                     <TextBlock Text="{Binding Name}"/>
                                 </StackPanel>
                             </DataTemplate>
