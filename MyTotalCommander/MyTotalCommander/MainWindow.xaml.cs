@@ -44,7 +44,6 @@ namespace WpfApplication37
             {
                 DirectoryEntry d = new DirectoryEntry(s, s, "<Driver>", "<DIR>", Directory.GetLastWriteTime(s), null, EntryType.Dir);
                 d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
-                //d.Imagepath.Source = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
                 entries.Add(d);
             }
             this.listView1.DataContext = entries;
@@ -52,7 +51,7 @@ namespace WpfApplication37
             
         }
 
-        void populateListViews()
+        void populateStayedListViews()
         {
             if (bal_listview_path != null && !bal_listview_path.Equals(""))
             {
@@ -62,7 +61,12 @@ namespace WpfApplication37
                         Directory.GetLastWriteTime(bal_listview_path),
                         null, EntryType.Dir);
                 bal_d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
-                showFilesAndDirectories(bal_d, bal_listview_path, subEntries);
+                try {                    
+                    showFilesAndDirectories(bal_d, bal_dir.Parent.FullName, subEntries);
+                } catch(NullReferenceException e)
+                {
+                    showFilesAndDirectories(bal_d, null, subEntries);
+                }
             }
             if (jobb_listview_path != null && !jobb_listview_path.Equals(""))
             {
@@ -71,10 +75,16 @@ namespace WpfApplication37
                             jobb_dir.Name, jobb_dir.FullName, "<Folder>", "<DIR>",
                             Directory.GetLastWriteTime(jobb_listview_path),
                             null, EntryType.Dir);
-                jobb_d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");
-                showFilesAndDirectories(jobb_d, jobb_listview_path, subEntries2);
+                jobb_d.Imagepath = (ImageSource)new ImageSourceConverter().ConvertFromString("Images/dir.gif");                
+                try
+                {
+                    showFilesAndDirectories(jobb_d, jobb_dir.Parent.FullName, subEntries2);
+                }
+                catch (NullReferenceException e)
+                {
+                    showFilesAndDirectories(jobb_d, null, subEntries2);
+                }
             }
-
         }
 
         void listViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -242,7 +252,7 @@ namespace WpfApplication37
                 if (!alreadyExists)
                 {
                     Directory.CreateDirectory(listview_path + "\\" + ujmappa_nev);
-                    populateListViews();
+                    populateStayedListViews();
                 }
                 else
                 {
@@ -309,7 +319,7 @@ namespace WpfApplication37
             {
                 MessageBox.Show("Nincs kijelölve elem", "Hiba", MessageBoxButton.OK);
             }
-            populateListViews();
+            populateStayedListViews();
         }
 
         public void TaskCompleted(IAsyncResult R)
@@ -359,7 +369,7 @@ namespace WpfApplication37
             {
                 MessageBox.Show("A kijelölt elem nem másolható!", "Hiba", MessageBoxButton.OK);
             }
-            populateListViews();
+            populateStayedListViews();
         }
 
         private void MoveOnClick(object sender, RoutedEventArgs e)
@@ -387,7 +397,7 @@ namespace WpfApplication37
             {
                 MessageBox.Show("A kijelölt elem nem másolható!", "Hiba", MessageBoxButton.OK);
             }
-            populateListViews();
+            populateStayedListViews();
         }
 
         public bool ContainsAny(string haystack, params string[] needles)
