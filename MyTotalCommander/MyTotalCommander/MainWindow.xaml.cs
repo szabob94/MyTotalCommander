@@ -365,7 +365,7 @@ namespace WpfApplication37
                 UIOption.AllDialogs, new AsyncCallback(TaskCompleted), new AsyncTransfer(delegatee,selected_item.Name,0));
             } else if(selected_item.Type == EntryType.File)
             {
-                delegatee = new CopyFileOrDirectory(FileSystem.CopyDirectory);
+                delegatee = new CopyFileOrDirectory(FileSystem.CopyFile);
                 delegatee.BeginInvoke(selected_item.Fullpath, hova + @"\" + selected_item.Name,
                 UIOption.AllDialogs, new AsyncCallback(TaskCompleted), new AsyncTransfer(delegatee, selected_item.Name,0));
             } else
